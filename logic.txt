@@ -1,0 +1,7 @@
+Memory Game
+
+Game randomly selects 15 pokemon to use for the game cards
+The game creates 2 cards for each pokemon selected
+The cards are shuffled, then displayed to the page
+
+A user clicks on a card, that card is flipped over to reveal the pokemon underneath

@@ -8,6 +8,10 @@ class Game extends Component {
         score: 0,
     }
 
+    handleClick = () => {
+        
+    }
+
     render() {
         return (
             <div>
