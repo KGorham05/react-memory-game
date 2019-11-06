@@ -16,6 +16,7 @@ class Game extends Component {
                 <div>
                     {/* Map over array of cards */}
                 </div>
+                <Footer />
             </div>
         )
     }

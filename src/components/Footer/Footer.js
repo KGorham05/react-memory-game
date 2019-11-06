@@ -3,7 +3,7 @@ import React from "react";
 function Footer() {
     return (
         <footer>
-            Memory Game!
+            This is the footer for the Memory Game!
         </footer>
     );
 }
