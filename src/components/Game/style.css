@@ -1,0 +1,5 @@
+.game-board {
+    height: calc(100vh - 200px);
+    /* display: grid;
+    grid-template-columns: repeat(12, 8.3%); */
+}

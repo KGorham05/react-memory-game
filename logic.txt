@@ -2,6 +2,21 @@ Memory Game
 
 Game randomly selects 15 pokemon to use for the game cards
 The game creates 2 cards for each pokemon selected
-The cards are shuffled, then displayed to the page
+The cards are shuffled, then displayed to the page face down
 
 A user clicks on a card, that card is flipped over to reveal the pokemon underneath
+That card stays flipped over until the user clicks on a second card
+
+Once 2 cards have been clicked, compare them to see if they are a match 
+if they are a match, leave the cards displayed
+    increment score
+    check for game win condition - all the cards are flipped over 
+if they are not the same, flip them back over to hidden
+    increment Incorrect guesses
+    check for game lost condition - incorrect guesses = a certain number (or use a timer?)
+
+Create Pokemon JSON data that has { id (unique), pokedexNum(used to compare matches), isFlipped (boolean for game logic), img}
+
+Create a script that imports the assets - 
+Loop over and build the JSON objects
+use FS to create file 

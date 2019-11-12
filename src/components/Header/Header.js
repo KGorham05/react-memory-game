@@ -1,8 +1,9 @@
 import React from "react";
+import "./style.css";
 
 function Header() {
     return (
-        <header>
+        <header className="head">
             This is the Header for the Memory Game!
         </header>
     );
