@@ -7,24 +7,37 @@ import pokeArr from "../../pokemon.json";
 import "./style.css";
 
 class Game extends Component {
+
     state = {
         score: 0,
-        pokeInPlay: []
-    };
+        chosenPokemon: []
+    }
 
-    getRandomPokemon = (list, n) => {
+    shuffleArray(arr) {
+        for (let i = (arr.length - 1); i > 0; i--) {
+            const j = Math.floor(Math.random() * i)
+            const temp = arr[i]
+            arr[i] = arr[j]
+            arr[j] = temp
+        }
+    }
+
+    getRandomPokemon = (arr, n) => {
         const pokemonSelected = [];
         // loop through n times 
         for (let i = 0; i < n; i++) {
-            let randomIndex = Math.floor(Math.random() * list.length);
-            let pick = list[randomIndex];
+            // select a pokemon from the array at random
+            const randomIndex = Math.floor(Math.random() * arr.length);
+            const pick = arr[randomIndex];
+            // add it to the array
+            pokemonSelected.push(pick);
+            // add another one to the array 
             pokemonSelected.push(pick);
             // remove item from array to prevent duplicates
-            list.splice(randomIndex, 1);
+            arr.splice(randomIndex, 1);
         }
-        this.setState({ pokeInPlay: pokemonSelected }, () => {
-            console.log(this.state.pokeInPlay);
-        });
+        this.shuffleArray(pokemonSelected);
+        this.setState({ chosenPokemon: pokemonSelected });
     }
 
     componentDidMount() {
@@ -35,7 +48,7 @@ class Game extends Component {
     // }
 
     render() {
-        if (this.state.pokeInPlay.length === 0) {
+        if (this.state.chosenPokemon.length === 0) {
             return (
                 <div>
                     Randomly Selecting your Pokemon!
@@ -48,9 +61,15 @@ class Game extends Component {
                     <Header />
                     <div className="game-board">
                         {/* Map over array of cards */}
-                        Pokemon have been selected!
-                        {this.state.pokeInPlay.map(poke => (
-                            <Card img={poke} />
+                        {this.state.chosenPokemon.map((poke, i) => (
+                            
+                                <Card 
+                                    key={i} 
+                                    img={poke} 
+                                    src={`${process.env.PUBLIC_URL}/assets/images/pokemon/${poke}`} 
+                                    isFlipped={false}
+                                />
+                            
                         ))}
                     </div>
                     <Footer />

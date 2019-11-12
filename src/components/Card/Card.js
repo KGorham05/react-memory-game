@@ -1,12 +1,13 @@
 import React from "react";
+import "./style.css"
 
 function Card(props) {
     return (
-        <div
+        <div className="card"
             // onClick={() => props.handleClick(props.id)}
-            style={{ backgroundImage: `url("${props.image}")` }}
+            // style={{ backgroundImage: `url("${props.src}")` }}
         >
-            {props.img}
+            <img className="card-img" src={props.src} />
         </div>
     )
 }
