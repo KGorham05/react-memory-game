@@ -1,11 +1,13 @@
 Memory Game
 
 Game randomly selects 15 pokemon to use for the game cards
+
 The game creates 2 cards for each pokemon selected
+
 The cards are shuffled, then displayed to the page face down
 
 A user clicks on a card, that card is flipped over to reveal the pokemon underneath
-That card stays flipped over until the user clicks on a second card
+That card stays flipped over until the user clicks on a second card (prevent clicking an already revealed card)
 
 Once 2 cards have been clicked, compare them to see if they are a match 
 if they are a match, leave the cards displayed
