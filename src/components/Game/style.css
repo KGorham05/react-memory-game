@@ -3,5 +3,4 @@
     display: flex;
     /* grid-template-columns: repeat(12, 8.3%); */
     flex-wrap: wrap;
-    row-gap: 0px;
 }

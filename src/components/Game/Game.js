@@ -41,7 +41,7 @@ class Game extends Component {
     }
 
     componentDidMount() {
-        this.getRandomPokemon(pokeArr, 10);
+        this.getRandomPokemon(pokeArr, 9);
     }
     // handleClick = () => {
 
@@ -59,7 +59,7 @@ class Game extends Component {
                 <div>
                     <Nav />
                     <Header />
-                    <div className="game-board">
+                    <div className="game-board container justify-content-center">
                         {/* Map over array of cards */}
                         {this.state.chosenPokemon.map((poke, i) => (
                             
@@ -72,7 +72,7 @@ class Game extends Component {
                             
                         ))}
                     </div>
-                    <Footer />
+                    {/* <Footer /> */}
                 </div>
             )
         }
