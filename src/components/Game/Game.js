@@ -41,9 +41,10 @@ class Game extends Component {
     componentDidMount() {
         this.getRandomPokemon(pokeArr, 9);
     }
-    // handleClick = () => {
 
-    // }
+    handleClick = () => {
+        console.log('Clicked on me!')
+    }
 
     render() {
         if (this.state.chosenPokemon.length === 0) {
@@ -59,14 +60,14 @@ class Game extends Component {
                     <div className="game-board container justify-content-center">
                         {/* Map over array of cards */}
                         {this.state.chosenPokemon.map((poke, i) => (
-                            
-                                <Card 
-                                    key={i} 
-                                    img={poke} 
-                                    src={`${process.env.PUBLIC_URL}/assets/images/pokemon/${poke}`} 
-                                    isFlipped={false}
-                                />
-                            
+                            <Card
+                                key={i}
+                                img={poke}
+                                src={`${process.env.PUBLIC_URL}/assets/images/pokemon/${poke}`}
+                                back={`${process.env.PUBLIC_URL}/assets/images/pokeball.png`}
+                                isFlipped={false}
+                                handleClick={this.handleClick}
+                            />
                         ))}
                     </div>
                     {/* <Footer /> */}

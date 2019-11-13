@@ -4,10 +4,9 @@ import "./style.css"
 function Card(props) {
     return (
         <div className="card"
-            // onClick={() => props.handleClick(props.id)}
-            // style={{ backgroundImage: `url("${props.src}")` }}
+            onClick={() => props.handleClick()}
         >
-            <img className="card-img" src={props.src} />
+            <img className="card-img" src={props.back} alt="pokemon-card"/>
         </div>
     )
 }
