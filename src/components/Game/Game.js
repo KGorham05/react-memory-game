@@ -1,7 +1,5 @@
 import React, { Component } from "react";
 import Nav from "../Nav";
-import Header from "../Header";
-import Footer from "../Footer";
 import Card from "../Card";
 import pokeArr from "../../pokemon.json";
 import "./style.css";
@@ -58,7 +56,6 @@ class Game extends Component {
             return (
                 <div>
                     <Nav />
-                    <Header />
                     <div className="game-board container justify-content-center">
                         {/* Map over array of cards */}
                         {this.state.chosenPokemon.map((poke, i) => (
