@@ -4,7 +4,7 @@ import "./style.css";
 function Nav() {
     return (
         <div className="nb">
-            This is the Nav for the Memory Game!
+            Pokemon Memory Game
         </div>
     );
 }

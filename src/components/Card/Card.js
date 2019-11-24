@@ -4,9 +4,9 @@ import "./style.css"
 function Card(props) {
     return (
         <div className="card"
-            onClick={() => props.handleClick()}
+            onClick={() => props.handleClick(props.id)}
         >
-            <img className="card-img" src={props.back} alt="pokemon-card"/>
+            <img className="card-img" src={props.img} alt="pokemon-card"/>
         </div>
     )
 }

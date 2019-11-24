@@ -8,7 +8,7 @@ class Game extends Component {
 
     state = {
         score: 0,
-        chosenPokemon: []
+        pokeData: []
     }
 
     shuffleArray(arr) {
@@ -26,7 +26,12 @@ class Game extends Component {
         for (let i = 0; i < n; i++) {
             // select a pokemon from the array at random
             const randomIndex = Math.floor(Math.random() * arr.length);
-            const pick = arr[randomIndex];
+            const pick = {
+                front: arr[randomIndex],
+                id: i,
+                back: "pokeball.png",
+                isPicRevealed: false
+            }
             // add it to the array
             pokemonSelected.push(pick);
             // add another one to the array 
@@ -35,19 +40,29 @@ class Game extends Component {
             arr.splice(randomIndex, 1);
         }
         this.shuffleArray(pokemonSelected);
-        this.setState({ chosenPokemon: pokemonSelected });
+        this.setState({ pokeData: pokemonSelected }, () => console.log(this.state.pokeData));
     }
 
     componentDidMount() {
         this.getRandomPokemon(pokeArr, 9);
     }
 
-    handleClick = () => {
+    handleClick = id => {
         console.log('Clicked on me!')
+        const newData = this.state.pokeData.map(item => {
+            const newItem = { ...item };
+            if (newItem.id === id) {
+                if (newItem.isPicRevealed === false) {
+                    newItem.isPicRevealed = true;
+                }
+            }
+            return newItem
+        })
+        this.setState({ pokeData: newData })
     }
 
     render() {
-        if (this.state.chosenPokemon.length === 0) {
+        if (this.state.pokeData.length === 0) {
             return (
                 <div>
                     Randomly Selecting your Pokemon!
@@ -59,16 +74,28 @@ class Game extends Component {
                     <Nav />
                     <div className="game-board container justify-content-center">
                         {/* Map over array of cards */}
-                        {this.state.chosenPokemon.map((poke, i) => (
-                            <Card
-                                key={i}
-                                img={poke}
-                                src={`${process.env.PUBLIC_URL}/assets/images/pokemon/${poke}`}
-                                back={`${process.env.PUBLIC_URL}/assets/images/pokeball.png`}
-                                isFlipped={false}
-                                handleClick={this.handleClick}
-                            />
-                        ))}
+                        {this.state.pokeData.map((poke) => {
+                            if (poke.isPicRevealed) {
+                                return (
+                                    <Card
+                                        key={poke.id}
+                                        id={poke.id}
+                                        img={`${process.env.PUBLIC_URL}/assets/images/pokemon/${poke.front}`}
+                                        handleClick={this.handleClick}
+                                    />
+                                )
+                            }
+                            return (
+                                <Card
+                                    key={poke.id}
+                                    id={poke.id}
+                                    img={`${process.env.PUBLIC_URL}/assets/images/${poke.back}`}
+                                    handleClick={this.handleClick}
+                                />
+                            )
+                        })}
+
+
                     </div>
                     {/* <Footer /> */}
                 </div>

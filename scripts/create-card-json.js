@@ -14,5 +14,3 @@ fs.readdir(sourceDir, (err, files) => {
     })
 });
 
-// console.log(listOfMons);
-
