@@ -8,8 +8,9 @@ class Game extends Component {
 
     state = {
         score: 0,
+        firstCardClicked: false,
         pokeData: []
-    }
+    };
 
     shuffleArray(arr) {
         for (let i = (arr.length - 1); i > 0; i--) {
@@ -18,7 +19,7 @@ class Game extends Component {
             arr[i] = arr[j]
             arr[j] = temp
         }
-    }
+    };
 
     getRandomPokemon = (arr, n) => {
         const pokemonSelected = [];
@@ -32,23 +33,40 @@ class Game extends Component {
                 back: "pokeball.png",
                 isPicRevealed: false
             }
+            const copyOfPick = {
+                front: arr[randomIndex],
+                id: i + "a",
+                back: "pokeball.png",
+                isPicRevealed: false
+            }
             // add it to the array
             pokemonSelected.push(pick);
             // add another one to the array 
-            pokemonSelected.push(pick);
+            pokemonSelected.push(copyOfPick);
             // remove item from array to prevent duplicates
             arr.splice(randomIndex, 1);
         }
         this.shuffleArray(pokemonSelected);
         this.setState({ pokeData: pokemonSelected }, () => console.log(this.state.pokeData));
-    }
+    };
 
     componentDidMount() {
         this.getRandomPokemon(pokeArr, 9);
-    }
+    };
+
+    handleCorrectGuess(newData) {
+        console.log("Correct Guess");
+        this.setState({ pokeData: newData })
+    };
+
+    handleIncorrectGuess(newData) {
+        console.log("Incorrect Guess");
+        this.setState({ pokeData: newData })
+    };
 
     handleClick = id => {
-        console.log('Clicked on me!')
+        let guessedCorrectly = false;
+
         const newData = this.state.pokeData.map(item => {
             const newItem = { ...item };
             if (newItem.id === id) {
@@ -57,9 +75,13 @@ class Game extends Component {
                 }
             }
             return newItem
-        })
-        this.setState({ pokeData: newData })
-    }
+        });
+        guessedCorrectly
+            ? this.handleCorrectGuess(newData)
+            : this.handleIncorrectGuess(newData)
+    };
+
+    
 
     render() {
         if (this.state.pokeData.length === 0) {
@@ -102,6 +124,6 @@ class Game extends Component {
             )
         }
     }
-}
+};
 
 export default Game;
