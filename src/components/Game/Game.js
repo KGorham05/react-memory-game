@@ -8,7 +8,7 @@ class Game extends Component {
 
     state = {
         score: 0,
-        firstCardClicked: false,
+        firstCardFlipped: false,
         pokeData: []
     };
 
@@ -65,7 +65,15 @@ class Game extends Component {
     };
 
     handleClick = id => {
-        let guessedCorrectly = false;
+
+        // check to see if this is the first card to be clicked
+            // if it is, filp it over. 
+            // if it is the second card
+                // flip it over
+                // compare it to the first card to see if they are a match
+                // if they are a match, leave them face up
+                // if they are not a match, hide the images again 
+        // let guessedCorrectly = false;
 
         const newData = this.state.pokeData.map(item => {
             const newItem = { ...item };
@@ -76,12 +84,11 @@ class Game extends Component {
             }
             return newItem
         });
-        guessedCorrectly
-            ? this.handleCorrectGuess(newData)
-            : this.handleIncorrectGuess(newData)
-    };
-
-    
+        this.setState({ pokeData: newData })
+        // guessedCorrectly
+        //     ? this.handleCorrectGuess(newData)
+        //     : this.handleIncorrectGuess(newData)
+    };   
 
     render() {
         if (this.state.pokeData.length === 0) {
@@ -93,7 +100,7 @@ class Game extends Component {
         } else {
             return (
                 <div>
-                    <Nav />
+                    <Nav logo={`${process.env.PUBLIC_URL}/assets/images/logo.png`}/>
                     <div className="game-board container justify-content-center">
                         {/* Map over array of cards */}
                         {this.state.pokeData.map((poke) => {

@@ -1,10 +1,10 @@
 import React from "react";
 import "./style.css";
 
-function Nav() {
+function Nav(props) {
     return (
-        <div className="nb">
-            Pokemon Memory Game
+        <div className="nb container-fluid flex">
+            <img src={props.logo} alt="pokemon logo" className="img-fluid logo mx-auto" />
         </div>
     );
 }
