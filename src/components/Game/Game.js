@@ -8,7 +8,9 @@ class Game extends Component {
 
     state = {
         score: 0,
-        firstCardFlipped: false,
+        aCardHasBeenPicked: false,
+        firstImgUrl: "",
+        secondImgUrl: "",
         pokeData: []
     };
 
@@ -28,15 +30,15 @@ class Game extends Component {
             // select a pokemon from the array at random
             const randomIndex = Math.floor(Math.random() * arr.length);
             const pick = {
-                front: arr[randomIndex],
+                frontImgPath: arr[randomIndex],
                 id: i,
-                back: "pokeball.png",
+                backImgPath: "pokeball.png",
                 isPicRevealed: false
             }
             const copyOfPick = {
-                front: arr[randomIndex],
+                frontImgPath: arr[randomIndex],
                 id: i + "a",
-                back: "pokeball.png",
+                backImgPath: "pokeball.png",
                 isPicRevealed: false
             }
             // add it to the array
@@ -54,41 +56,78 @@ class Game extends Component {
         this.getRandomPokemon(pokeArr, 9);
     };
 
-    handleCorrectGuess(newData) {
+    compareCa
+    
+    handleCorrectGuess = newData => {
         console.log("Correct Guess");
         this.setState({ pokeData: newData })
     };
 
-    handleIncorrectGuess(newData) {
+    handleIncorrectGuess = newData => {
         console.log("Incorrect Guess");
         this.setState({ pokeData: newData })
     };
 
-    handleClick = id => {
-
-        // check to see if this is the first card to be clicked
-            // if it is, filp it over. 
-            // if it is the second card
-                // flip it over
-                // compare it to the first card to see if they are a match
-                // if they are a match, leave them face up
-                // if they are not a match, hide the images again 
-        // let guessedCorrectly = false;
-
+    revealCard = id => {
+        // map over the data to find the card object to update
         const newData = this.state.pokeData.map(item => {
             const newItem = { ...item };
             if (newItem.id === id) {
                 if (newItem.isPicRevealed === false) {
                     newItem.isPicRevealed = true;
+                    // if the first img url to compare is empty
+                    if (!this.state.firstImgUrl) {
+                        // save the img url for logic comparison with the second card
+                        this.setState({ firstImgUrl: newItem.frontImgPath }, () => {
+                            console.log(this.state)
+                        })
+                    }
+                    else {
+                        // ** NOTE ** consider breaking this into a compare card function ** **
+                        this.setState({ secondImgUrl: newItem.frontImgPath }, () => {
+                            console.log(this.state)
+                            // let guessedCorrectly = false;
+                            // if they are a match, leave them face up
+                            if (this.state.firstImgUrl === this.state.secondImgUrl) {
+                                console.log('You found a match');
+                            }
+                            // if they are not a match, hide the images again 
+                            else {
+                                console.log('Not a match');
+                            }
+
+                            // guessedCorrectly
+                            //     ? this.handleCorrectGuess(newData)
+                            //     : this.handleIncorrectGuess(newData)
+                        })
+                    }
                 }
             }
             return newItem
         });
         this.setState({ pokeData: newData })
-        // guessedCorrectly
-        //     ? this.handleCorrectGuess(newData)
-        //     : this.handleIncorrectGuess(newData)
-    };   
+    }
+
+    handleClick = id => {
+
+        // if a card has not been picked
+        if (!this.state.aCardHasBeenPicked) {
+            // update the state
+            this.setState({ aCardHasBeenPicked: true }, () => {
+                // filp it over. 
+                this.revealCard(id);
+
+            })
+        }
+        // else it is the second card
+        else {
+            // flip it over
+            this.revealCard(id);
+            // compare it to the first card to see if they are a match
+
+        }
+
+    };
 
     render() {
         if (this.state.pokeData.length === 0) {
@@ -100,7 +139,7 @@ class Game extends Component {
         } else {
             return (
                 <div>
-                    <Nav logo={`${process.env.PUBLIC_URL}/assets/images/logo.png`}/>
+                    <Nav logo={`${process.env.PUBLIC_URL}/assets/images/logo.png`} />
                     <div className="game-board container justify-content-center">
                         {/* Map over array of cards */}
                         {this.state.pokeData.map((poke) => {
@@ -109,7 +148,7 @@ class Game extends Component {
                                     <Card
                                         key={poke.id}
                                         id={poke.id}
-                                        img={`${process.env.PUBLIC_URL}/assets/images/pokemon/${poke.front}`}
+                                        img={`${process.env.PUBLIC_URL}/assets/images/pokemon/${poke.frontImgPath}`}
                                         handleClick={this.handleClick}
                                     />
                                 )
@@ -118,7 +157,7 @@ class Game extends Component {
                                 <Card
                                     key={poke.id}
                                     id={poke.id}
-                                    img={`${process.env.PUBLIC_URL}/assets/images/${poke.back}`}
+                                    img={`${process.env.PUBLIC_URL}/assets/images/${poke.backImgPath}`}
                                     handleClick={this.handleClick}
                                 />
                             )

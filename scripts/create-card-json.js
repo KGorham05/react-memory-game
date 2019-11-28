@@ -3,7 +3,6 @@ const sourceDir = "../public/assets/images/pokemon";
 const destDir = "../src/pokemon.json"
 let listOfMons = [];
 
-
 fs.readdir(sourceDir, (err, files) => {
     files.forEach(file => {
         listOfMons.push(file);
