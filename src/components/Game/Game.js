@@ -83,24 +83,18 @@ class Game extends Component {
     handleIncorrectGuess = () => {
         console.log("Incorrect Guess");
         // flip the cards back over 
-        console.log('callback of incorrect guess');
         const newData = this.state.pokeData.map(item => {
             const newItem = { ...item };
             // look for the first card
             if (newItem.id === this.state.firstPoke.id) {
-                console.log("trying to hide first card");
                 newItem.isPicRevealed = false;
             }
             // look for the second card
             else if (newItem.id === this.state.secondPoke.id) {
-                console.log("trying to hide second card")
                 newItem.isPicRevealed = false;
             }
             return newItem
         });
-        console.log('post map')
-        console.log(this.state.firstPoke);
-        console.log(this.state.secondPoke);
         this.setState({
             pokeData: newData,
             firstPoke: "",
@@ -135,24 +129,19 @@ class Game extends Component {
     }
 
     handleClick = id => {
-
         // if a card has not been picked
         if (!this.state.aCardHasBeenPicked) {
             // update the state
             this.setState({ aCardHasBeenPicked: true }, () => {
                 // filp it over. 
                 this.revealCard(id);
-
             })
         }
         // else it is the second card
         else {
             // flip it over
             this.revealCard(id);
-            // compare it to the first card to see if they are a match
-
         }
-
     };
 
     render() {
@@ -188,8 +177,6 @@ class Game extends Component {
                                 />
                             )
                         })}
-
-
                     </div>
                     {/* <Footer /> */}
                 </div>
