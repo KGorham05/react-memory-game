@@ -55,17 +55,24 @@ class Game extends Component {
     componentDidMount() {
         this.getRandomPokemon(pokeArr, 9);
     };
-
-    compareCa
     
-    handleCorrectGuess = newData => {
+    handleCorrectGuess = () => {
         console.log("Correct Guess");
-        this.setState({ pokeData: newData })
+        // reset img urls for logic comparison
+        this.setState({ 
+            firstImgUrl: "", 
+            secondImgUrl: ""
+        })
     };
 
-    handleIncorrectGuess = newData => {
+    handleIncorrectGuess = () => {
         console.log("Incorrect Guess");
-        this.setState({ pokeData: newData })
+        // reset img urls for logic comparison
+        this.setState({ 
+            firstImgUrl: "", 
+            secondImgUrl: ""
+        })
+        // flip the cards back over 
     };
 
     revealCard = id => {
@@ -86,19 +93,20 @@ class Game extends Component {
                         // ** NOTE ** consider breaking this into a compare card function ** **
                         this.setState({ secondImgUrl: newItem.frontImgPath }, () => {
                             console.log(this.state)
-                            // let guessedCorrectly = false;
                             // if they are a match, leave them face up
                             if (this.state.firstImgUrl === this.state.secondImgUrl) {
-                                console.log('You found a match');
+                                // handle correctly guess
+                                this.handleCorrectGuess();
+                        
                             }
-                            // if they are not a match, hide the images again 
+                            // if they are not a match 
                             else {
-                                console.log('Not a match');
+                                // handle incorrect guess
+                                this.handleIncorrectGuess();
                             }
 
-                            // guessedCorrectly
-                            //     ? this.handleCorrectGuess(newData)
-                            //     : this.handleIncorrectGuess(newData)
+
+                
                         })
                     }
                 }
