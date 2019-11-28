@@ -9,8 +9,8 @@ class Game extends Component {
     state = {
         score: 0,
         aCardHasBeenPicked: false,
-        firstImgUrl: "",
-        secondImgUrl: "",
+        firstPoke: "",
+        secondPoke: "",
         pokeData: []
     };
 
@@ -55,25 +55,59 @@ class Game extends Component {
     componentDidMount() {
         this.getRandomPokemon(pokeArr, 9);
     };
-    
+
+    compareCards = () => {
+        console.log(this.state)
+        // if they are a match, leave them face up
+        if (this.state.firstPoke.frontImgPath === this.state.secondPoke.frontImgPath) {
+            // handle correctly guess
+            this.handleCorrectGuess();
+
+        }
+        // if they are not a match 
+        else {
+            // handle incorrect guess
+            this.handleIncorrectGuess();
+        }
+    }
+
     handleCorrectGuess = () => {
         console.log("Correct Guess");
         // reset img urls for logic comparison
-        this.setState({ 
-            firstImgUrl: "", 
-            secondImgUrl: ""
+        this.setState({
+            firstPoke: "",
+            secondPoke: ""
         })
     };
 
     handleIncorrectGuess = () => {
         console.log("Incorrect Guess");
-        // reset img urls for logic comparison
-        this.setState({ 
-            firstImgUrl: "", 
-            secondImgUrl: ""
-        })
         // flip the cards back over 
-    };
+        console.log('callback of incorrect guess');
+        const newData = this.state.pokeData.map(item => {
+            const newItem = { ...item };
+            // look for the first card
+            if (newItem.id === this.state.firstPoke.id) {
+                console.log("trying to hide first card");
+                newItem.isPicRevealed = false;
+            }
+            // look for the second card
+            else if (newItem.id === this.state.secondPoke.id) {
+                console.log("trying to hide second card")
+                newItem.isPicRevealed = false;
+            }
+            return newItem
+        });
+        console.log('post map')
+        console.log(this.state.firstPoke);
+        console.log(this.state.secondPoke);
+        this.setState({
+            pokeData: newData,
+            firstPoke: "",
+            secondPoke: ""
+        })
+    }
+
 
     revealCard = id => {
         // map over the data to find the card object to update
@@ -82,31 +116,15 @@ class Game extends Component {
             if (newItem.id === id) {
                 if (newItem.isPicRevealed === false) {
                     newItem.isPicRevealed = true;
-                    // if the first img url to compare is empty
-                    if (!this.state.firstImgUrl) {
-                        // save the img url for logic comparison with the second card
-                        this.setState({ firstImgUrl: newItem.frontImgPath }, () => {
-                            console.log(this.state)
-                        })
+                    // if the first pokemon data has not been saved for comparing it
+                    if (!this.state.firstPoke) {
+                        // save the pokemon object to the state
+                        this.setState({ firstPoke: newItem })
                     }
                     else {
                         // ** NOTE ** consider breaking this into a compare card function ** **
-                        this.setState({ secondImgUrl: newItem.frontImgPath }, () => {
-                            console.log(this.state)
-                            // if they are a match, leave them face up
-                            if (this.state.firstImgUrl === this.state.secondImgUrl) {
-                                // handle correctly guess
-                                this.handleCorrectGuess();
-                        
-                            }
-                            // if they are not a match 
-                            else {
-                                // handle incorrect guess
-                                this.handleIncorrectGuess();
-                            }
-
-
-                
+                        this.setState({ secondPoke: newItem }, () => {
+                            this.compareCards()
                         })
                     }
                 }
