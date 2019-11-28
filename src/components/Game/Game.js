@@ -8,6 +8,7 @@ class Game extends Component {
 
     state = {
         score: 0,
+        canGuess: true,
         aCardHasBeenPicked: false,
         firstPoke: "",
         secondPoke: "",
@@ -67,7 +68,11 @@ class Game extends Component {
         // if they are not a match 
         else {
             // handle incorrect guess
-            this.handleIncorrectGuess();
+            setTimeout(() => {
+                this.setState({ canGuess: true }, () => {
+                    this.handleIncorrectGuess();
+                })
+            }, 1500);
         }
     }
 
@@ -76,7 +81,8 @@ class Game extends Component {
         // reset img urls for logic comparison
         this.setState({
             firstPoke: "",
-            secondPoke: ""
+            secondPoke: "",
+            canGuess: true
         })
     };
 
@@ -117,7 +123,10 @@ class Game extends Component {
                     }
                     else {
                         // ** NOTE ** consider breaking this into a compare card function ** **
-                        this.setState({ secondPoke: newItem }, () => {
+                        this.setState({
+                            secondPoke: newItem,
+                            canGuess: false
+                        }, () => {
                             this.compareCards()
                         })
                     }
@@ -129,18 +138,21 @@ class Game extends Component {
     }
 
     handleClick = id => {
-        // if a card has not been picked
-        if (!this.state.aCardHasBeenPicked) {
-            // update the state
-            this.setState({ aCardHasBeenPicked: true }, () => {
-                // filp it over. 
+        // if you're currently able to click
+        if (this.state.canGuess) {
+            // if a card has not been picked
+            if (!this.state.aCardHasBeenPicked) {
+                // update the state
+                this.setState({ aCardHasBeenPicked: true }, () => {
+                    // filp it over. 
+                    this.revealCard(id);
+                })
+            }
+            // else it is the second card
+            else {
+                // flip it over
                 this.revealCard(id);
-            })
-        }
-        // else it is the second card
-        else {
-            // flip it over
-            this.revealCard(id);
+            }
         }
     };
 
