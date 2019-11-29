@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import Menu from "../Menu";
 import Nav from "../Nav";
 import Card from "../Card";
 import pokeArr from "../../pokemon.json";
@@ -12,8 +13,8 @@ class Game extends Component {
         firstPoke: "",
         secondPoke: "",
         pokeData: [],
-        minutes: 0,
-        seconds: 0
+        // minutes: 0,
+        // seconds: 0
     };
 
     shuffleArray(arr) {
@@ -185,6 +186,7 @@ class Game extends Component {
         } else {
             return (
                 <div>
+                    <Menu />
                     <Nav logo={`${process.env.PUBLIC_URL}/assets/images/logo.png`} />
                     <div className="game-board container justify-content-center">
                         {/* Map over array of cards */}
