@@ -1,5 +1,5 @@
 import React from "react";
-import StartBtn from "../StartBtn"
+import StartBtn from "../StartBtn";
 import "./style.css";
 
 function Menu() {

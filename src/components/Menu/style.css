@@ -1,5 +1,18 @@
+@font-face {
+    font-family: pokeHollow;
+    src: url(../../fonts/PokemonSolid.ttf);
+}
+
 .menu {
     height: 30vh;
     width: 40vw;
     border: 2px solid black;
+    font-family: pokeHollow;
+    color: yellow;
+    text-shadow:
+		-3px -3px 0 #000,
+		3px -3px 0 #000,
+		-3px 3px 0 #000,
+		3px 3px 0 #000;
+    background-color: lightblue;
 }
