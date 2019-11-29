@@ -5,7 +5,6 @@
 
 #overlay {
   position: fixed; /* Sit on top of the page content */
-  /* display: none; Hidden by default */
   width: 100%; /* Full width (cover the whole page) */
   height: 100%; /* Full height (cover the whole page) */
   top: 0;
@@ -17,12 +16,17 @@
 }
 
 .menu {
-    /* position: fixed; */
-    z-index: 2;
-    border: 2px solid black;
-    color: yellow;
-    background-color: lightblue;
-    cursor: pointer; /* Add a pointer on hover */
+  margin-top: 50px;
+  display: inline-block;
+  z-index: 2;
+  border: 5px solid rgb(45, 45, 253);
+  color: yellow;
+  background-color: lightblue;
+  cursor: pointer; /* Add a pointer on hover */
+  border-radius: 15px;
+  -webkit-box-shadow: inset 5px 5px 10px 3px rgba(0,0,0,0.75);  
+  -moz-box-shadow: inset 5px 5px 10px 3px rgba(0,0,0,0.75);
+  box-shadow: inset 5px 5px 10px 3px rgba(0,0,0,0.75);
 }
 
 .menu-title {
@@ -31,5 +35,16 @@
 		-3px -3px 0 #000,
 		3px -3px 0 #000,
 		-3px 3px 0 #000,
-		3px 3px 0 #000;
+    3px 3px 0 #000;
+    margin-top: 20px;
+    margin-bottom: 30px;
+}
+
+.directions {
+  color: black;
+  font-size: 24px;
+}
+
+.start-btn {
+  margin-bottom: 20px;
 }
