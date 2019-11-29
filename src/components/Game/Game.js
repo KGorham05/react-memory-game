@@ -176,6 +176,11 @@ class Game extends Component {
         }
     };
 
+    handleStartBtn() {
+        console.log('Clicked the start btn');
+        document.getElementById('overlay').style.display = 'none';
+    }
+
     render() {
         if (this.state.pokeData.length === 0) {
             return (
@@ -186,7 +191,7 @@ class Game extends Component {
         } else {
             return (
                 <div>
-                    <Menu />
+                    <Menu handleClick={this.handleStartBtn} />
                     <Nav logo={`${process.env.PUBLIC_URL}/assets/images/logo.png`} />
                     <div className="game-board container justify-content-center">
                         {/* Map over array of cards */}

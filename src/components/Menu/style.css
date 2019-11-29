@@ -3,16 +3,33 @@
     src: url(../../fonts/PokemonSolid.ttf);
 }
 
+#overlay {
+  position: fixed; /* Sit on top of the page content */
+  /* display: none; Hidden by default */
+  width: 100%; /* Full width (cover the whole page) */
+  height: 100%; /* Full height (cover the whole page) */
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0,0,0,0.5); /* Black background with opacity */
+  z-index: 3; /* Specify a stack order in case you're using a different order for other elements */  
+}
+
 .menu {
-    height: 30vh;
-    width: 40vw;
+    /* position: fixed; */
+    z-index: 2;
     border: 2px solid black;
-    font-family: pokeHollow;
     color: yellow;
-    text-shadow:
+    background-color: lightblue;
+    cursor: pointer; /* Add a pointer on hover */
+}
+
+.menu-title {
+  font-family: pokeHollow;
+  text-shadow:
 		-3px -3px 0 #000,
 		3px -3px 0 #000,
 		-3px 3px 0 #000,
 		3px 3px 0 #000;
-    background-color: lightblue;
 }
