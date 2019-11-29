@@ -7,12 +7,13 @@ import "./style.css";
 class Game extends Component {
 
     state = {
-        score: 0,
         canGuess: true,
         aCardHasBeenPicked: false,
         firstPoke: "",
         secondPoke: "",
-        pokeData: []
+        pokeData: [],
+        minutes: 0,
+        seconds: 0
     };
 
     shuffleArray(arr) {
@@ -78,12 +79,31 @@ class Game extends Component {
 
     handleCorrectGuess = () => {
         console.log("Correct Guess");
-        // reset img urls for logic comparison
-        this.setState({
-            firstPoke: "",
-            secondPoke: "",
-            canGuess: true
+        // check for win condition
+        let numCardsFaceUp = 0;
+        // loop through all of the objects in the array
+        this.state.pokeData.map(obj => {
+            // if the card is facing up, increment the count
+            if (obj.isPicRevealed) {
+                numCardsFaceUp++;
+            }
+            return obj;
         })
+        // if the number of cards facing up = the number of cards in play
+        if (numCardsFaceUp === 18) {
+            // alert you won!
+            setTimeout(() => {
+                alert('You Won!');
+            }, 2000);
+        }
+        else {
+            // reset img urls for logic comparison
+            this.setState({
+                firstPoke: "",
+                secondPoke: "",
+                canGuess: true
+            })
+        }
     };
 
     handleIncorrectGuess = () => {
@@ -106,8 +126,7 @@ class Game extends Component {
             firstPoke: "",
             secondPoke: ""
         })
-    }
-
+    };
 
     revealCard = id => {
         // map over the data to find the card object to update
@@ -135,7 +154,7 @@ class Game extends Component {
             return newItem
         });
         this.setState({ pokeData: newData })
-    }
+    };
 
     handleClick = id => {
         // if you're currently able to click
@@ -194,7 +213,19 @@ class Game extends Component {
                 </div>
             )
         }
-    }
+    };
+
 };
 
 export default Game;
+
+// add game menu modal
+    // start button
+    // game title
+    // link to my portfolio + linkedIn
+    // sound on/off icon button
+
+// add game won message
+// add a countdown till game over
+// add card animations
+// add sound effects 
