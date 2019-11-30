@@ -95,7 +95,7 @@ class Game extends Component {
             // alert you won!
             setTimeout(() => {
                 alert('You Won!');
-            }, 2000);
+            }, 100);
         }
         else {
             // reset img urls for logic comparison
