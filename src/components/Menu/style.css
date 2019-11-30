@@ -32,10 +32,10 @@
 .menu-title {
   font-family: pokeHollow;
   text-shadow:
-		-5px -5px 0 #000,
-		5px -5px 0 #000,
-		-5px 5px 0 #000,
-    5px 5px 0 #000;
+		-5px -5px 0 rgb(45, 45, 253),
+		5px -5px 0 rgb(45, 45, 253),
+		-5px 5px 0 rgb(45, 45, 253),
+    5px 5px 0 rgb(45, 45, 253);
     margin-top: 20px;
     margin-bottom: 30px;
     font-size: 80px;

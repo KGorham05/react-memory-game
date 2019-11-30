@@ -13,8 +13,8 @@ class Game extends Component {
         firstPoke: "",
         secondPoke: "",
         pokeData: [],
-        // minutes: 0,
-        // seconds: 0
+        minutes: 0,
+        seconds: 0
     };
 
     shuffleArray(arr) {
@@ -176,10 +176,31 @@ class Game extends Component {
         }
     };
 
-    handleStartBtn() {
+    handleStartBtn = () => {
         console.log('Clicked the start btn');
         document.getElementById('overlay').style.display = 'none';
-    }
+        this.stopWatch();
+    };
+
+    stopWatch = () => {
+        console.log('tick')
+        this.setState({
+            seconds: this.state.seconds + 1,
+        }, () => {
+            console.log(this.state.seconds);
+            if (this.state.seconds === 60) {
+                this.setState({
+                    minutes: this.state.minutes + 1,
+                    seconds: 0
+                }, () => {
+                    console.log(this.state.minutes + ":" + this.state.seconds);
+                })
+            }
+        })
+        setTimeout(() => {
+            this.stopWatch();
+        }, 1000);
+    };
 
     render() {
         if (this.state.pokeData.length === 0) {
@@ -192,7 +213,7 @@ class Game extends Component {
             return (
                 <div>
                     <Menu handleClick={this.handleStartBtn} />
-                    <Nav logo={`${process.env.PUBLIC_URL}/assets/images/logo.png`} />
+                    <Nav logo={`${process.env.PUBLIC_URL}/assets/images/logo.png`} minutes={this.state.minutes} seconds={this.state.seconds}/>
                     <div className="game-board container justify-content-center">
                         {/* Map over array of cards */}
                         {this.state.pokeData.map((poke) => {
@@ -227,8 +248,6 @@ class Game extends Component {
 export default Game;
 
 // add game menu modal
-    // start button
-    // game title
     // link to my portfolio + linkedIn
     // sound on/off icon button
 
