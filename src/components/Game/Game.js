@@ -14,7 +14,7 @@ class Game extends Component {
         secondPoke: "",
         pokeData: [],
         minutes: 0,
-        seconds: 0,
+        seconds: "00",
         counter: 0
     };
 
@@ -186,13 +186,23 @@ class Game extends Component {
     stopWatch = () => {
 
         this.setState({
-            seconds: this.state.seconds + 1,
+            counter: this.state.counter + 1,
+            // seconds: this.state.seconds + 1,
         }, () => {
-            console.log(this.state.seconds);
-            if (this.state.seconds === 60) {
+            if (this.state.counter < 10) {
+                this.setState({
+                    seconds: "0" + this.state.counter
+                })
+            } else if (this.state.counter > 9) {
+                this.setState({
+                    seconds: this.state.counter
+                })
+            }
+            if (this.state.seconds === 59) {
                 this.setState({
                     minutes: this.state.minutes + 1,
-                    seconds: 0
+                    seconds: "00",
+                    counter: 0
                 })
             }
         })
