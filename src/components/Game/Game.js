@@ -14,7 +14,8 @@ class Game extends Component {
         secondPoke: "",
         pokeData: [],
         minutes: 0,
-        seconds: 0
+        seconds: 0,
+        counter: 0
     };
 
     shuffleArray(arr) {
@@ -95,7 +96,7 @@ class Game extends Component {
             // alert you won!
             setTimeout(() => {
                 alert('You Won!');
-            }, 100);
+            }, 1000);
         }
         else {
             // reset img urls for logic comparison
@@ -183,7 +184,7 @@ class Game extends Component {
     };
 
     stopWatch = () => {
-        console.log('tick')
+
         this.setState({
             seconds: this.state.seconds + 1,
         }, () => {
@@ -192,8 +193,6 @@ class Game extends Component {
                 this.setState({
                     minutes: this.state.minutes + 1,
                     seconds: 0
-                }, () => {
-                    console.log(this.state.minutes + ":" + this.state.seconds);
                 })
             }
         })
@@ -237,7 +236,6 @@ class Game extends Component {
                             )
                         })}
                     </div>
-                    {/* <Footer /> */}
                 </div>
             )
         }
