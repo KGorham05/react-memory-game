@@ -99,7 +99,7 @@ class Game extends Component {
             // alert you won!
             setTimeout(() => {
                 this.displayGameOverModal();
-            }, 1000);
+            }, 200);
         }
         else {
             // reset img urls for logic comparison
@@ -247,7 +247,7 @@ class Game extends Component {
             return (
                 <div>
                     <Menu handleClick={this.handleStartBtn} />
-                    <EndModal />
+                    <EndModal minutes={this.state.minutes} seconds={this.state.seconds}/>
                     <Nav logo={`${process.env.PUBLIC_URL}/assets/images/logo.png`} minutes={this.state.minutes} seconds={this.state.seconds}/>
                     <div className="game-board container justify-content-center">
                         {/* Map over array of cards */}

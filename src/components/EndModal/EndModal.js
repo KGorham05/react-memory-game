@@ -15,7 +15,13 @@ function EndModal(props) {
 
                     <div className="row">
                         <div className="col-md-12">
-                            <h3 className="text-center">Good game!</h3>
+                            <h3 className="text-center">Game Over!</h3>
+                        </div>
+                    </div>
+
+                    <div className="row">
+                        <div className="col-md-12">
+                            <h3 className="text-center">Your time was: {props.minutes}:{props.seconds}</h3>
                         </div>
                     </div>
 
