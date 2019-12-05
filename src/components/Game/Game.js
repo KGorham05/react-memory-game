@@ -60,7 +60,7 @@ class Game extends Component {
     };
 
     componentDidMount() {
-        this.getRandomPokemon(pokeArr, 2);
+        this.getRandomPokemon(pokeArr, 9);
     };
 
     compareCards = () => {
@@ -95,7 +95,7 @@ class Game extends Component {
             return obj;
         })
         // if the number of cards facing up = the number of cards in play
-        if (numCardsFaceUp === 4) {
+        if (numCardsFaceUp === 18) {
             // alert you won!
             setTimeout(() => {
                 this.displayGameOverModal();
