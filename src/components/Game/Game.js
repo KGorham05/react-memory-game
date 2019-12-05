@@ -3,7 +3,10 @@ import Menu from "../Menu";
 import Nav from "../Nav";
 import Card from "../Card";
 import pokeArr from "../../pokemon.json";
+import EndModal from "../EndModal";
 import "./style.css";
+
+var myTimer;
 
 class Game extends Component {
 
@@ -57,7 +60,7 @@ class Game extends Component {
     };
 
     componentDidMount() {
-        this.getRandomPokemon(pokeArr, 9);
+        this.getRandomPokemon(pokeArr, 2);
     };
 
     compareCards = () => {
@@ -92,7 +95,7 @@ class Game extends Component {
             return obj;
         })
         // if the number of cards facing up = the number of cards in play
-        if (numCardsFaceUp === 18) {
+        if (numCardsFaceUp === 4) {
             // alert you won!
             setTimeout(() => {
                 this.displayGameOverModal();
@@ -182,8 +185,25 @@ class Game extends Component {
         this.stopWatch();
     };
 
+    resetState = () => {
+        this.setState({
+            canGuess: true,
+            aCardHasBeenPicked: false,
+            firstPoke: "",
+            secondPoke: "",
+            pokeData: [],
+            minutes: 0,
+            seconds: "00",
+            counter: 0
+        })
+    };
+
     displayGameOverModal = () => {
+        console.log('game over!');
+        clearInterval(myTimer);
         document.getElementById('game-over-modal').style.display = 'block';
+        // this.getRandomPokemon(pokeArr, 2);
+        // this.resetState();
     };
 
     // listen for restart game button click
@@ -211,7 +231,7 @@ class Game extends Component {
                 })
             }
         })
-        setTimeout(() => {
+        myTimer = setTimeout(() => {
             this.stopWatch();
         }, 1000);
     };
@@ -227,6 +247,7 @@ class Game extends Component {
             return (
                 <div>
                     <Menu handleClick={this.handleStartBtn} />
+                    <EndModal />
                     <Nav logo={`${process.env.PUBLIC_URL}/assets/images/logo.png`} minutes={this.state.minutes} seconds={this.state.seconds}/>
                     <div className="game-board container justify-content-center">
                         {/* Map over array of cards */}

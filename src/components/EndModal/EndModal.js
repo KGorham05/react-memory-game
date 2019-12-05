@@ -14,8 +14,14 @@ function EndModal(props) {
                     </div>
 
                     <div className="row">
+                        <div className="col-md-12">
+                            <h3 className="text-center">Good game!</h3>
+                        </div>
+                    </div>
+
+                    <div className="row">
                         <div className="col-md-12 text-center">
-                            <button className="start-btn btn btn-primary" onClick={props.handleClick}>Start Game!</button>
+                            <button className="start-btn btn btn-primary" onClick={props.handleClick}>Restart Game!</button>
                         </div>
                     </div>
 
