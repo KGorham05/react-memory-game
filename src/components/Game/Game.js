@@ -95,7 +95,7 @@ class Game extends Component {
         if (numCardsFaceUp === 18) {
             // alert you won!
             setTimeout(() => {
-                alert('You Won!');
+                this.displayGameOverModal();
             }, 1000);
         }
         else {
@@ -178,10 +178,15 @@ class Game extends Component {
     };
 
     handleStartBtn = () => {
-        console.log('Clicked the start btn');
         document.getElementById('overlay').style.display = 'none';
         this.stopWatch();
     };
+
+    displayGameOverModal = () => {
+        document.getElementById('game-over-modal').style.display = 'block';
+    };
+
+    // listen for restart game button click
 
     stopWatch = () => {
 
